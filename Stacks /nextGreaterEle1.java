@@ -1,24 +1,16 @@
 class Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int[] nextG =nextGreater(nums2);
         HashMap<Integer , Integer> map = new HashMap<>();
 
-        for(int i=0 ;i< nums1.length ;i++){
-            map.put(nums1[i] , i);
-        }
-        int[]result = new int[nums1.length];
-        Arrays.fill(result ,-1);
-
-        int[] nextG =nextGreater(nums2);
-        for(int i=0 ;i<nextG.length ;i++){
-            int ele = nums2[i];
-            int nextGreater = nextG[i];
-            
-            if(map.containsKey(ele)) {
-                int index = map.get(ele);
-                result[index] = nextGreater;
-            }
+        for(int i=0 ;i<nums2.length ;i++){
+            map.put(nums2[i] , nextG[i]);
         }
 
+        int[] result = new int[nums1.length];
+        for(int i=0 ;i<nums1.length ;i++){
+            result[i] = map.get(nums1[i]);
+        }
         return result;
     }
     public int[] nextGreater(int []nums){
